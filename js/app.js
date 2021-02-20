@@ -103,16 +103,67 @@ const createScene = (trick) => {
       //   rotX.setKeys(keyFramesRx);
 
       //   skateboard.animations.push(xSlide);
+
+      // WHEEL MOVEMENT
+      const wheelRB = scene.getMeshByName("wheel back right_0");
+      const wheelLB = scene.getMeshByName("wheel back left_0");
+      const wheelRF = scene.getMeshByName("wheel front right_0");
+      const wheelLF = scene.getMeshByName("wheel front left_0");
+      wheelRB.rotationQuaternion = null;
+      wheelRF.rotationQuaternion = null;
+      wheelLB.rotationQuaternion = null;
+      wheelLF.rotationQuaternion = null;
+
+      const animWheelLeft = new BABYLON.Animation(
+        "wheelAnimation",
+        "rotation.z",
+        50,
+        BABYLON.Animation.ANIMATIONTYPE_FLOAT,
+        BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE
+      );
+      const animWheelRight = new BABYLON.Animation(
+        "wheelAnimation",
+        "rotation.z",
+        -50,
+        BABYLON.Animation.ANIMATIONTYPE_FLOAT,
+        BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE
+      );
+      const wheelKeys = [];
+      wheelKeys.push({
+        frame: 0,
+        value: 0,
+      });
+      wheelKeys.push({
+        frame: 30,
+        value: 2 * Math.PI,
+      });
+
+      animWheelLeft.setKeys(wheelKeys);
+      animWheelRight.setKeys(wheelKeys);
+
+      wheelRB.animations = [];
+      wheelRB.animations.push(animWheelRight);
+      wheelLB.animations = [];
+      wheelLB.animations.push(animWheelLeft);
+      wheelLF.animations = [];
+      wheelLF.animations.push(animWheelLeft);
+      wheelRF.animations = [];
+      wheelRF.animations.push(animWheelRight);
+      scene.beginAnimation(wheelRB, 0, 30, true);
+      scene.beginAnimation(wheelLB, 0, 30, true);
+      scene.beginAnimation(wheelRF, 0, 30, true);
+      scene.beginAnimation(wheelLF, 0, 30, true);
       scene.beginDirectAnimation(skateboard, ollie(), 0, 2 * frameRate, true);
     }
   );
+
+  //GROUND
   const groundMat = new BABYLON.StandardMaterial("groundMat");
   groundMat.diffuseColor = new BABYLON.Color3(0.13, 0.13, 0.13);
   const ground = BABYLON.MeshBuilder.CreateGround("ground", {
     width: 20,
     height: 20,
   });
-
   ground.material = groundMat;
 
   return scene;
