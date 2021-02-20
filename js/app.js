@@ -162,11 +162,13 @@ const createScene = (trick) => {
   BABYLON.SceneLoader.ImportMeshAsync(
     "",
     "./assets/road/",
-    "CUPIC_ROAD.gltf"
+    "1229 Road.gltf"
   ).then((mesh) => {
     const road = scene.getMeshByName("node-0");
-    road.scaling = new BABYLON.Vector3(0.05, 0.05, 0.05);
-    road.position.y = -1;
+    road.scaling = new BABYLON.Vector3(0.5, 0.5, 0.5);
+    road.rotation = new BABYLON.Vector3(0, 1.57, 0);
+    console.log(road.rotation);
+    road.position.y = -3.5;
   });
 
   //GROUND
