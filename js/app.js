@@ -30,82 +30,208 @@ const createScene = (trick) => {
     skateboard.position.y = 0.5;
     skateboard.rotationQuaternion = null;
     const frameRate = 10;
-    //   const posY = new BABYLON.Animation(
-    //     "posY",
-    //     "position.y",
-    //     frameRate,
-    //     BABYLON.Animation.ANIMATIONTYPE_FLOAT,
-    //     BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE
-    //   );
-    //   const keyFramesPy = [];
 
-    //   keyFramesPy.push({
-    //     frame: 0,
-    //     value: 0,
-    //   });
-    //   keyFramesPy.push({
-    //     frame: 1,
-    //     value: 2.5,
-    //   });
+    //Pop Animation
+    let posY = new BABYLON.Animation(
+      "posY",
+      "position.y",
+      frameRate,
+      BABYLON.Animation.ANIMATIONTYPE_FLOAT,
+      BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE
+    );
+    let keyFramesPy = [];
 
-    //   keyFramesPy.push({
-    //     frame: 5,
-    //     value: 6,
-    //   });
-    //   keyFramesPy.push({
-    //     frame: 7,
-    //     value: 6,
-    //   });
+    keyFramesPy.push({
+      frame: 0,
+      value: 0,
+    });
+    keyFramesPy.push({
+      frame: 1,
+      value: 2.5,
+    });
 
-    //   keyFramesPy.push({
-    //     frame: frameRate,
-    //     value: 0.5,
-    //   });
-    //   keyFramesPy.push({
-    //     frame: frameRate + 5,
-    //     value: 0.5,
-    //   });
+    keyFramesPy.push({
+      frame: 5,
+      value: 6,
+    });
+    keyFramesPy.push({
+      frame: 7,
+      value: 6,
+    });
 
-    //   posY.setKeys(keyFramesPy);
+    keyFramesPy.push({
+      frame: frameRate,
+      value: 0.5,
+    });
+    keyFramesPy.push({
+      frame: frameRate + 5,
+      value: 0.5,
+    });
 
-    //   //Rotation Animation
-    //   var rotX = new BABYLON.Animation(
-    //     "rotX",
-    //     "rotation.x",
-    //     frameRate,
-    //     BABYLON.Animation.ANIMATIONTYPE_FLOAT,
-    //     BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE
-    //   );
+    posY.setKeys(keyFramesPy);
 
-    //   var keyFramesRx = [];
+    //Rotation Animation
+    let rotX = new BABYLON.Animation(
+      "rotX",
+      "rotation.x",
+      frameRate,
+      BABYLON.Animation.ANIMATIONTYPE_FLOAT,
+      BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE
+    );
 
-    //   keyFramesRx.push({
-    //     frame: 0,
-    //     value: 0,
-    //   });
+    var keyFramesRx = [];
 
-    //   keyFramesRx.push({
-    //     frame: 2,
-    //     value: 1,
-    //   });
+    keyFramesRx.push({
+      frame: 0,
+      value: 0,
+    });
 
-    //   keyFramesRx.push({
-    //     frame: 5,
-    //     value: -0.4,
-    //   });
+    keyFramesRx.push({
+      frame: 2,
+      value: 1,
+    });
 
-    //   keyFramesRx.push({
-    //     frame: frameRate,
-    //     value: 0,
-    //   });
-    //   keyFramesRx.push({
-    //     frame: frameRate + 5,
-    //     value: 0,
-    //   });
+    keyFramesRx.push({
+      frame: 5,
+      value: -0.4,
+    });
 
-    //   rotX.setKeys(keyFramesRx);
+    keyFramesRx.push({
+      frame: frameRate,
+      value: 0,
+    });
+    keyFramesRx.push({
+      frame: frameRate + 5,
+      value: 0,
+    });
 
-    //   skateboard.animations.push(xSlide);
+    rotX.setKeys(keyFramesRx);
+
+    const ollieAnimationGroup = new BABYLON.AnimationGroup("Ollie");
+    ollieAnimationGroup.addTargetedAnimation(posY, skateboard);
+    ollieAnimationGroup.addTargetedAnimation(rotX, skateboard);
+
+    //KICKFLIP
+
+    posY = new BABYLON.Animation(
+      "posY",
+      "position.y",
+      10,
+      BABYLON.Animation.ANIMATIONTYPE_FLOAT,
+      BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE
+    );
+    keyFramesPy = [];
+
+    keyFramesPy.push({
+      frame: 0,
+      value: 0,
+    });
+    keyFramesPy.push({
+      frame: 1,
+      value: 2.5,
+    });
+
+    keyFramesPy.push({
+      frame: 5,
+      value: 6,
+    });
+    keyFramesPy.push({
+      frame: 7,
+      value: 6,
+    });
+
+    keyFramesPy.push({
+      frame: frameRate,
+      value: 0.5,
+    });
+    keyFramesPy.push({
+      frame: frameRate + 5,
+      value: 0.5,
+    });
+
+    posY.setKeys(keyFramesPy);
+
+    //Rotation Animation
+    rotX = new BABYLON.Animation(
+      "rotX",
+      "rotation.x",
+      frameRate,
+      BABYLON.Animation.ANIMATIONTYPE_FLOAT,
+      BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE
+    );
+
+    keyFramesRx = [];
+
+    keyFramesRx.push({
+      frame: 0,
+      value: 0,
+    });
+
+    keyFramesRx.push({
+      frame: 2,
+      value: 1,
+    });
+
+    keyFramesRx.push({
+      frame: 5,
+      value: -0.4,
+    });
+
+    keyFramesRx.push({
+      frame: frameRate,
+      value: 0,
+    });
+    keyFramesRx.push({
+      frame: frameRate + 5,
+      value: 0,
+    });
+
+    rotX.setKeys(keyFramesRx);
+    //Rotation Animation
+    var rotZ = new BABYLON.Animation(
+      "rotZ",
+      "rotation.z",
+      frameRate,
+      BABYLON.Animation.ANIMATIONTYPE_FLOAT,
+      BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE
+    );
+
+    var keyFramesRz = [];
+
+    keyFramesRz.push({
+      frame: 0,
+      value: 0,
+    });
+    keyFramesRz.push({
+      frame: 1,
+      value: 0,
+    });
+
+    keyFramesRz.push({
+      frame: 3,
+      value: 1,
+    });
+
+    keyFramesRz.push({
+      frame: 6,
+      value: 6.3,
+    });
+
+    keyFramesRz.push({
+      frame: frameRate,
+      value: 6.3,
+    });
+    keyFramesRz.push({
+      frame: frameRate + 5,
+      value: 6.3,
+    });
+
+    rotZ.setKeys(keyFramesRz);
+
+    const kickflipAnimationGroup = new BABYLON.AnimationGroup("Kickflip");
+    kickflipAnimationGroup.addTargetedAnimation(rotZ, skateboard);
+    kickflipAnimationGroup.addTargetedAnimation(rotX, skateboard);
+    kickflipAnimationGroup.addTargetedAnimation(posY, skateboard);
 
     // WHEEL MOVEMENT
     const wheelRB = scene.getMeshByName("wheel back right_0");
@@ -156,30 +282,18 @@ const createScene = (trick) => {
     scene.beginAnimation(wheelLB, 0, 30, true);
     scene.beginAnimation(wheelRF, 0, 30, true);
     scene.beginAnimation(wheelLF, 0, 30, true);
-    scene.beginDirectAnimation(skateboard, kickflip(), 0, 2 * frameRate, true);
-  });
-
-  BABYLON.SceneLoader.ImportMeshAsync(
-    "",
-    "./assets/road/",
-    "1229 Road.gltf"
-  ).then((mesh) => {
-    const road = scene.getMeshByName("node-0");
-    road.scaling = new BABYLON.Vector3(0.5, 0.5, 0.5);
-    road.rotation = new BABYLON.Vector3(0, 1.57, 0);
-    console.log(road.rotation);
-    road.position.y = -3.5;
+    ollieAnimationGroup.play(false);
+    kickflipAnimationGroup.play(true);
   });
 
   //GROUND
-  //   const groundMat = new BABYLON.StandardMaterial("groundMat");
-  //   groundMat.diffuseColor = new BABYLON.Color3(0.13, 0.13, 0.13);
-  //   const ground = BABYLON.MeshBuilder.CreateGround("ground", {
-  //     width: 20,
-  //     height: 20,
-  //   });
-  //   ground.material = groundMat;
-
+  const groundMat = new BABYLON.StandardMaterial("groundMat");
+  groundMat.diffuseColor = new BABYLON.Color3(0.13, 0.13, 0.13);
+  const ground = BABYLON.MeshBuilder.CreateGround("ground", {
+    width: 20,
+    height: 20,
+  });
+  ground.material = groundMat;
   return scene;
 };
 
@@ -188,202 +302,3 @@ const scene = createScene();
 engine.runRenderLoop(() => {
   scene.render();
 });
-
-const ollie = () => {
-  const frameRate = 10;
-  const posY = new BABYLON.Animation(
-    "posY",
-    "position.y",
-    10,
-    BABYLON.Animation.ANIMATIONTYPE_FLOAT,
-    BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE
-  );
-  const keyFramesPy = [];
-
-  keyFramesPy.push({
-    frame: 0,
-    value: 0,
-  });
-  keyFramesPy.push({
-    frame: 1,
-    value: 2.5,
-  });
-
-  keyFramesPy.push({
-    frame: 5,
-    value: 6,
-  });
-  keyFramesPy.push({
-    frame: 7,
-    value: 6,
-  });
-
-  keyFramesPy.push({
-    frame: frameRate,
-    value: 0.5,
-  });
-  keyFramesPy.push({
-    frame: frameRate + 5,
-    value: 0.5,
-  });
-
-  posY.setKeys(keyFramesPy);
-
-  //Rotation Animation
-  var rotX = new BABYLON.Animation(
-    "rotX",
-    "rotation.x",
-    frameRate,
-    BABYLON.Animation.ANIMATIONTYPE_FLOAT,
-    BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE
-  );
-
-  var keyFramesRx = [];
-
-  keyFramesRx.push({
-    frame: 0,
-    value: 0,
-  });
-
-  keyFramesRx.push({
-    frame: 2,
-    value: 1,
-  });
-
-  keyFramesRx.push({
-    frame: 5,
-    value: -0.4,
-  });
-
-  keyFramesRx.push({
-    frame: frameRate,
-    value: 0,
-  });
-  keyFramesRx.push({
-    frame: frameRate + 5,
-    value: 0,
-  });
-
-  rotX.setKeys(keyFramesRx);
-
-  return [rotX, posY];
-};
-const kickflip = () => {
-  const frameRate = 10;
-  const posY = new BABYLON.Animation(
-    "posY",
-    "position.y",
-    10,
-    BABYLON.Animation.ANIMATIONTYPE_FLOAT,
-    BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE
-  );
-  const keyFramesPy = [];
-
-  keyFramesPy.push({
-    frame: 0,
-    value: 0,
-  });
-  keyFramesPy.push({
-    frame: 1,
-    value: 2.5,
-  });
-
-  keyFramesPy.push({
-    frame: 5,
-    value: 6,
-  });
-  keyFramesPy.push({
-    frame: 7,
-    value: 6,
-  });
-
-  keyFramesPy.push({
-    frame: frameRate,
-    value: 0.5,
-  });
-  keyFramesPy.push({
-    frame: frameRate + 5,
-    value: 0.5,
-  });
-
-  posY.setKeys(keyFramesPy);
-
-  //Rotation Animation
-  var rotX = new BABYLON.Animation(
-    "rotX",
-    "rotation.x",
-    frameRate,
-    BABYLON.Animation.ANIMATIONTYPE_FLOAT,
-    BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE
-  );
-
-  var keyFramesRx = [];
-
-  keyFramesRx.push({
-    frame: 0,
-    value: 0,
-  });
-
-  keyFramesRx.push({
-    frame: 2,
-    value: 1,
-  });
-
-  keyFramesRx.push({
-    frame: 5,
-    value: -0.4,
-  });
-
-  keyFramesRx.push({
-    frame: frameRate,
-    value: 0,
-  });
-  keyFramesRx.push({
-    frame: frameRate + 5,
-    value: 0,
-  });
-
-  rotX.setKeys(keyFramesRx);
-  //Rotation Animation
-  var rotZ = new BABYLON.Animation(
-    "rotZ",
-    "rotation.z",
-    frameRate,
-    BABYLON.Animation.ANIMATIONTYPE_FLOAT,
-    BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE
-  );
-
-  var keyFramesRz = [];
-
-  keyFramesRz.push({
-    frame: 0,
-    value: 0,
-  });
-  keyFramesRz.push({
-    frame: 1,
-    value: 0,
-  });
-
-  keyFramesRz.push({
-    frame: 3,
-    value: 1,
-  });
-
-  keyFramesRz.push({
-    frame: 6,
-    value: 6.3,
-  });
-
-  keyFramesRz.push({
-    frame: frameRate,
-    value: 6.3,
-  });
-  keyFramesRz.push({
-    frame: frameRate + 5,
-    value: 6.3,
-  });
-
-  rotZ.setKeys(keyFramesRz);
-
-  return [rotZ, rotX, posY];
-};
